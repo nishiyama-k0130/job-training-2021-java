@@ -2,7 +2,7 @@ package com.sample.todo.entity;
 
 import java.io.Serializable;
 
-/**
+/**データベースのテーブル構造に該当するクラス
  * TODO_APPテーブルに該当するエンティティクラス<br>
  * JavaBeansのルールに従っています。
  */

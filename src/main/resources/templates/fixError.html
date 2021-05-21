@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Sample TODO Application</title>
+
+    <link rel="stylesheet" href="css/fixError.css" type="text/css" />
+</head>
+
+<body th:each="result : ${todoList}">
+    <h1>New Todo</h1>
+
+    <form th:action="@{/fixDone/{id}(id=*{result['todoId']})}" th:method="post">
+        <ul>
+            <li>
+                <label for="title">Title</label>
+                <input id="title" type="text" name="title" th:value="${result['title']}"></input>
+            </li>
+            <li>
+                <label for="detail">Detail</label>
+                <textarea id="detail" type="text" name="detail" th:text="${result['detail']}"></textarea>
+            </li>
+            <li>TitleもしくはDetailが長すぎます！入力し直してください。</li>
+            <li><input class="button" type="submit" name="fixdone" value="修正する"></input></li>
+        </ul>
+    </form>
+</body>
+
+</html>

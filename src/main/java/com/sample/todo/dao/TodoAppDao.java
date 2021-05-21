@@ -18,11 +18,11 @@ import org.springframework.stereotype.Component;
 public class TodoAppDao {
 
     @Autowired
-    NamedParameterJdbcTemplate jdbcTemplate;
+    NamedParameterJdbcTemplate jdbcTemplate; //データベースに接続する時に使用されるクラス
+    
 
     public List<TodoApp> getTodoAppList() {
-        List<TodoApp> resultList = jdbcTemplate.query("SELECT * FROM TODO_APP", new MapSqlParameterSource(null),
-                new TodoAppRowMapper());
+        List<TodoApp> resultList = jdbcTemplate.query("SELECT * FROM TODO_APP", new MapSqlParameterSource(null), new TodoAppRowMapper());
         return resultList;
     }
 
@@ -39,4 +39,29 @@ public class TodoAppDao {
         paramMap.addValue("detail", detail);
         jdbcTemplate.update("INSERT INTO TODO_APP VALUES(:todoId, :title, :detail)", paramMap);
     }
+
+    public <T> void delete(int id)
+    {
+        MapSqlParameterSource paramMap = new MapSqlParameterSource();
+        paramMap.addValue("todoId", id);
+        jdbcTemplate.update("delete from TODO_APP where TODO_ID = :todoId", paramMap);
+    }
+
+    
+    public List<TodoApp> getTodoAppListFix(int id) {
+        MapSqlParameterSource paramMap = new MapSqlParameterSource();
+        TodoAppRowMapper todoapprowmapper = new TodoAppRowMapper();
+        paramMap.addValue("todoId", id);
+        List<TodoApp> resultList = jdbcTemplate.query("SELECT * FROM TODO_APP where TODO_ID = :todoId", paramMap, todoapprowmapper);
+        return resultList;
+    }
+
+    public <T> void update(int todoId, String title, String detail) {
+        MapSqlParameterSource paramMap = new MapSqlParameterSource();
+        paramMap.addValue("todoId", todoId);
+        paramMap.addValue("title", title);
+        paramMap.addValue("detail", detail);
+        jdbcTemplate.update("update TODO_APP SET TITLE = :title, DETAIL = :detail where TODO_ID = :todoId", paramMap);
+    }
+    
 }

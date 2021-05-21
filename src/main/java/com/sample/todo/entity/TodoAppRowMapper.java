@@ -12,6 +12,7 @@ public class TodoAppRowMapper implements RowMapper<TodoApp> {
 
     @Override
     public TodoApp mapRow(ResultSet rs, int rowNum) throws SQLException {
+        //ResultSet rs : 1行の文
         TodoApp app = new TodoApp();
         app.setTodoId(rs.getInt("TODO_ID"));
         app.setTitle(rs.getString("TITLE"));

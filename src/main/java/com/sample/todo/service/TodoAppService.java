@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
  *
  * @Componentと書いておくと、他からはは@Autowiredと記述すれば利用できる。Spring Beanという概念。
  */
-@Component
+@Component 
 public class TodoAppService {
 
     /**
@@ -30,4 +30,19 @@ public class TodoAppService {
         int nextId = dao.getNextId();
         dao.insert(nextId, title, detail);
     }
+
+    public void delete(int id) {
+        System.out.println(id);
+        dao.delete(id);
+    }
+
+    
+    public List<TodoApp> getTodoAppListFix(int id) {
+        return dao.getTodoAppListFix(id);
+    }
+
+    public void fixDone(int id, String title, String detail) {
+        dao.update(id, title, detail);
+    }
+    
 }
