@@ -13,12 +13,27 @@
     <div class="operation-area">
         <button type="button" onclick="location.href='./new'">New Todo</button>
     </div>
+    <form th:action="@{/sort(__(${name!=null?'name=${title}':','})__,__(${age!=null?'age=${select}':','})__)}">
+        <p>
+        <select name="title">
+        <option value="TITLE">タイトル</option>
+        <option value="DEAD_LINE">期限</option>
+        <option value="TODO_ID">ID</option>
+        </select>
+        <select name="select">
+            <option value="ascend">昇順</option>
+            <option value="descend">降順</option>
+        </select>
+        <input type="submit" value="ソートする" />
+        </p>
+    </form>
     <table>
         <thead>
             <tr>
-                <th>#</th>
+                <th>ID</th>
                 <th>タイトル</th>
                 <th>詳細</th>
+                <th>期限</th>
                 <th>削除</th>
                 <th>修正</th>
             </tr>
@@ -29,6 +44,7 @@
                 <td class="todo-id" th:text="${result['todoId']}"></td>
                 <td class="title" th:text="${result['title']}"></td>
                 <td class="detail" th:text="${result['detail']}"></td>
+                <td class="deadline" th:text="${result['deadline']}"></td>
                 <td>
                     <form th:action="@{/delete/{id}(id=*{result['todoId']})}" th:method="post">
                         <input class="button" type="submit" value="削除" />

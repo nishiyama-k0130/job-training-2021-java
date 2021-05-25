@@ -32,12 +32,13 @@ public class TodoAppDao {
         return ++maxTodoId;
     }
 
-    public <T> void insert(int todoId, String title, String detail) {
+    public <T> void insert(int todoId, String title, String detail, String deadline) {
         MapSqlParameterSource paramMap = new MapSqlParameterSource();
         paramMap.addValue("todoId", todoId);
         paramMap.addValue("title", title);
         paramMap.addValue("detail", detail);
-        jdbcTemplate.update("INSERT INTO TODO_APP VALUES(:todoId, :title, :detail)", paramMap);
+        paramMap.addValue("deadline", deadline);
+        jdbcTemplate.update("INSERT INTO TODO_APP VALUES(:todoId, :title, :detail, :deadline)", paramMap);
     }
 
     public <T> void delete(int id)
@@ -56,12 +57,26 @@ public class TodoAppDao {
         return resultList;
     }
 
-    public <T> void update(int todoId, String title, String detail) {
+    public <T> void update(int todoId, String title, String detail, String deadline) {
         MapSqlParameterSource paramMap = new MapSqlParameterSource();
         paramMap.addValue("todoId", todoId);
         paramMap.addValue("title", title);
         paramMap.addValue("detail", detail);
-        jdbcTemplate.update("update TODO_APP SET TITLE = :title, DETAIL = :detail where TODO_ID = :todoId", paramMap);
+        paramMap.addValue("deadline", deadline);
+        jdbcTemplate.update("update TODO_APP SET TITLE = :title, DETAIL = :detail, DEAD_LINE = :deadline where TODO_ID = :todoId", paramMap);
+    }
+
+    public List<TodoApp> getTodoAppListSort(String title, String select) {
+        if(select.equals("ascend")){
+            String sql = "SELECT * FROM TODO_APP ORDER BY "+ title;
+            List<TodoApp> resultList = jdbcTemplate.query(sql, new MapSqlParameterSource(null), new TodoAppRowMapper());
+            return resultList;
+        }
+        else{
+            String sql = "SELECT * FROM TODO_APP ORDER BY "+ title +" DESC";
+            List<TodoApp> resultList = jdbcTemplate.query(sql, new MapSqlParameterSource(null), new TodoAppRowMapper());
+            return resultList;
+        }
     }
     
 }

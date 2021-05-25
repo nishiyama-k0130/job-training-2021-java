@@ -1,11 +1,11 @@
 package com.sample.todo.entity;
 
 import java.io.Serializable;
-
 /**データベースのテーブル構造に該当するクラス
  * TODO_APPテーブルに該当するエンティティクラス<br>
  * JavaBeansのルールに従っています。
  */
+
 public class TodoApp implements Serializable {
     /**
      * おまじない
@@ -15,6 +15,7 @@ public class TodoApp implements Serializable {
     private int todoId;
     private String title;
     private String detail;
+    private String deadline;
 
     public TodoApp() {
     }
@@ -41,5 +42,13 @@ public class TodoApp implements Serializable {
 
     public void setDetail(String detail) {
         this.detail = detail;
+    }
+
+    public String getDeadline() {
+        return this.deadline;
+    }
+
+    public void setDeadline(String deadline) {
+        this.deadline = deadline;
     }
 }

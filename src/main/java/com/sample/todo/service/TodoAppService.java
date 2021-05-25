@@ -1,6 +1,8 @@
 package com.sample.todo.service;
 
 import java.util.List;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 
 import com.sample.todo.dao.TodoAppDao;
 import com.sample.todo.entity.TodoApp;
@@ -22,17 +24,23 @@ public class TodoAppService {
     @Autowired
     private TodoAppDao dao;
 
+    public String nowtime(){
+        Date today = new Date();
+        SimpleDateFormat d1 = new SimpleDateFormat("yyyy-MM-dd");
+        String nowtime = d1.format(today);
+        return nowtime;
+    }
+
     public List<TodoApp> getTodoAppList() {
         return dao.getTodoAppList();
     }
 
-    public void register(String title, String detail) {
+    public void register(String title, String detail, String deadline) {
         int nextId = dao.getNextId();
-        dao.insert(nextId, title, detail);
+        dao.insert(nextId, title, detail, deadline);
     }
 
     public void delete(int id) {
-        System.out.println(id);
         dao.delete(id);
     }
 
@@ -41,8 +49,12 @@ public class TodoAppService {
         return dao.getTodoAppListFix(id);
     }
 
-    public void fixDone(int id, String title, String detail) {
-        dao.update(id, title, detail);
+    public void fixDone(int id, String title, String detail, String deadline) {
+        dao.update(id, title, detail, deadline);
+    }
+
+    public List<TodoApp> getTodoAppSort(String title, String select){
+        return dao.getTodoAppListSort(title, select);
     }
     
 }

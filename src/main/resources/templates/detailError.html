@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <title>Sample TODO Application</title>
 
-    <link rel="stylesheet" href="css/detail.css" type="text/css" />
+    <link rel="stylesheet" href="css/fixError.css" type="text/css" />
 </head>
 
 <body>
@@ -25,6 +25,7 @@
                 <label for="deadline">期限</label>
                 <input id="deadline" type="date" th:min="${nowtime}" name="deadline"></input>
             </li>
+            <li>TitleもしくはDetailが長すぎます！入力し直してください。</li>
             <li><input class="button" type="submit" name="register" value="追加"></input></li>
         </ul>
     </form>

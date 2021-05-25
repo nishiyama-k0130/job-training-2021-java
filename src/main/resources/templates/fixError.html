@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <title>Sample TODO Application</title>
 
-    <link rel="stylesheet" href="css/fixError.css" type="text/css" />
+    <link rel="stylesheet" th:href="@{/css/fixError.css}" type="text/css" />
 </head>
 
 <body th:each="result : ${todoList}">
@@ -20,6 +20,10 @@
             <li>
                 <label for="detail">Detail</label>
                 <textarea id="detail" type="text" name="detail" th:text="${result['detail']}"></textarea>
+            </li>
+            <li>
+                <label for="deadline">期限</label>
+                <input id="deadline" type="date" th:min="${nowtime}" name="deadline"></input>
             </li>
             <li>TitleもしくはDetailが長すぎます！入力し直してください。</li>
             <li><input class="button" type="submit" name="fixdone" value="修正する"></input></li>
