@@ -78,7 +78,6 @@ public class TodoAppDao {
             String sql = "SELECT * FROM TODO_APP ORDER BY "+ title +" DESC";
             List<TodoApp> resultList = jdbcTemplate.query(sql, new MapSqlParameterSource(null), new TodoAppRowMapper());
             return resultList;
-            //
         }
     }
     
