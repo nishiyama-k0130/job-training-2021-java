@@ -1,64 +1,76 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
-<head>
-    <meta charset="UTF-8" />
-    <title>Sample TODO Application</title>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Sample TODO Application</title>
 
-    <link rel="stylesheet" href="css/index.css" type="text/css" />
-</head>
+        <link rel="stylesheet" href="css/index.css" type="text/css" />
 
-<body>
-    <h1>Todo List</h1>
-    <div class="operation-area">
-        <button type="button" onclick="location.href='./new'">New Todo</button>
-    </div>
-    <form th:action="@{/sort(__(${name!=null?'name=${title}':','})__,__(${age!=null?'age=${select}':','})__)}">
-        <p>
-        <select name="title">
-        <option value="TITLE">タイトル</option>
-        <option value="DEAD_LINE">期限</option>
-        <option value="TODO_ID">ID</option>
-        </select>
-        <select name="select">
-            <option value="ascend">昇順</option>
-            <option value="descend">降順</option>
-        </select>
-        <input type="submit" value="ソートする" />
-        </p>
-    </form>
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>タイトル</th>
-                <th>詳細</th>
-                <th>期限</th>
-                <th>削除</th>
-                <th>修正</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="result : ${todoList}">
-                <!--tymeleafの記述方法 -->
-                <td class="todo-id" th:text="${result['todoId']}"></td>
-                <td class="title" th:text="${result['title']}"></td>
-                <td class="detail" th:text="${result['detail']}"></td>
-                <td class="deadline" th:text="${result['deadline']}"></td>
-                <td>
-                    <form th:action="@{/delete/{id}(id=*{result['todoId']})}" th:method="post">
-                        <input class="button" type="submit" value="削除" />
-                    </form>
-                </td>
-                <td>
-                    <form th:action="@{/fix/{id}(id=*{result['todoId']})}" th:method="post">
-                        <input class="button" type="submit" value="修正" />
-                    </form>
-                </td>
-                <!--tr:１行を表す、td: １列を表す-->
-            </tr>
-        </tbody>
-    </table>
-</body>
+        <script type="text/javascript"> 
+            function check() {
+                var check = confirm('削除してよろしいですか？');
+                return check;
+            }
+        </script>        
+    </head>
+
+    <body>
+        <h1>Todo List</h1>
+        <div class="bottom">
+            <div class="operation-area">
+                <button type="button" onclick="location.href='./new'">New Todo</button>
+            </div>
+            <div class="sort">
+                <form th:action="@{/sort(__(${name!=null?'name=${title}':','})__,__(${age!=null?'age=${select}':','})__)}">
+                    <p>
+                    <select name="title">
+                        <option value="TODO_ID">ID</option>
+                        <option value="TITLE">タイトル</option>
+                        <option value="DEAD_LINE">期限</option>
+                    </select>
+                    <select name="select">
+                        <option value="ascend">昇順</option>
+                        <option value="descend">降順</option>
+                    </select>
+                    <input type="submit" value="ソートする" />
+                    </p>
+                </form>
+            </div>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>タイトル</th>
+                    <th>詳細</th>
+                    <th>期限</th>
+                    <th>カテゴリ</th>
+                    <th>削除</th>
+                    <th>修正</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="result : ${todoList}">
+                    <!--tymeleafの記述方法 -->
+                    <td class="todo-id" th:text="${result['todoId']}"></td>
+                    <td class="title" th:text="${result['title']}"></td>
+                    <td class="detail" th:text="${result['detail']}"></td>
+                    <td class="deadline" th:text="${result['deadline']}"></td>
+                    <td class="category" th:text="${result['category']}"></td>
+                    <td>
+                        <form th:action="@{/delete/{id}(id=*{result['todoId']})}" th:method="post" >
+                            <input class="button" type="submit" value="削除" onclick="return check()" />
+                        </form>
+                    </td>
+                    <td>
+                        <form th:action="@{/fix/{id}(id=*{result['todoId']})}" th:method="post">
+                            <input class="button" type="submit" value="修正" />
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </body>
 
 </html>

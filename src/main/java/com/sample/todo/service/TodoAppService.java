@@ -35,9 +35,9 @@ public class TodoAppService {
         return dao.getTodoAppList();
     }
 
-    public void register(String title, String detail, String deadline) {
+    public void register(String title, String detail, String deadline, String category) {
         int nextId = dao.getNextId();
-        dao.insert(nextId, title, detail, deadline);
+        dao.insert(nextId, title, detail, deadline, category);
     }
 
     public void delete(int id) {
@@ -49,8 +49,8 @@ public class TodoAppService {
         return dao.getTodoAppListFix(id);
     }
 
-    public void fixDone(int id, String title, String detail, String deadline) {
-        dao.update(id, title, detail, deadline);
+    public void fixDone(int id, String title, String detail, String deadline, String category) {
+        dao.update(id, title, detail, deadline, category);
     }
 
     public List<TodoApp> getTodoAppSort(String title, String select){

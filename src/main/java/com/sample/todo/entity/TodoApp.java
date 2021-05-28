@@ -16,6 +16,7 @@ public class TodoApp implements Serializable {
     private String title;
     private String detail;
     private String deadline;
+    private String category;
 
     public TodoApp() {
     }
@@ -50,5 +51,13 @@ public class TodoApp implements Serializable {
 
     public void setDeadline(String deadline) {
         this.deadline = deadline;
+    }
+
+    public String getCategory() {
+        return this.category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 }

@@ -18,6 +18,7 @@ public class TodoAppRowMapper implements RowMapper<TodoApp> {
         app.setTitle(rs.getString("TITLE"));
         app.setDetail(rs.getString("DETAIL"));
         app.setDeadline(rs.getString("DEAD_LINE"));
+        app.setCategory(rs.getString("CATEGORY"));
         return app;
     }
 }

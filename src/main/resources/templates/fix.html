@@ -25,6 +25,15 @@
                 <label for="deadline">期限</label>
                 <input id="deadline" type="date" th:min="${nowtime}" name="deadline"></input>
             </li>
+            <li>
+                <label for="category">カテゴリー</label>
+                <select name="category">
+                    <option value="家庭">家庭</option>
+                    <option value="仕事">仕事</option>
+                    <option value="趣味">趣味</option>
+                    <option value="買い物">買い物</option>
+                </select>
+            </li>
             <li><input class="button" type="submit" name="fixdone" value="修正する"></input></li>
         </ul>
     </form>

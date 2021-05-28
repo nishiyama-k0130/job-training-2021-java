@@ -52,7 +52,7 @@ public class TodoAppController {
             return "detailError";
         }
         else{
-            service.register(todoApp.getTitle(), todoApp.getDetail(), todoApp.getDeadline());
+            service.register(todoApp.getTitle(), todoApp.getDetail(), todoApp.getDeadline(), todoApp.getCategory());
             return "redirect:index";// 登録したらindexに移る
         }
     }
@@ -83,7 +83,7 @@ public class TodoAppController {
             return "fixError";
         }
         else{
-            service.fixDone(id, todoApp.getTitle(), todoApp.getDetail(), todoApp.getDeadline());
+            service.fixDone(id, todoApp.getTitle(), todoApp.getDetail(), todoApp.getDeadline(), todoApp.getCategory());
             return "redirect:/index";// 登録したらindexに移る
         }
         
@@ -91,7 +91,6 @@ public class TodoAppController {
 
     @RequestMapping("/sort") //"/sort"のURLできた、かつ、POSTメソッドできた時
     String sort(Model model, @RequestParam("title") String title, @RequestParam("select") String select){
-        System.out.println(title+select);
         List<TodoApp> todoList = service.getTodoAppSort(title, select);
         String nowtime = service.nowtime();
         model.addAttribute("todoList", todoList);// ここの"todoList"というキーがindex.htmlで参照されている
@@ -99,4 +98,3 @@ public class TodoAppController {
         return "index";
     }
 }
-//, method = { RequestMethod.GET, RequestMethod.POST }

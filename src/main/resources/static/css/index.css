@@ -2,6 +2,21 @@ h1 {
     margin: 10px;
 }
 
+.bottom{
+    font-size: 0;
+}
+
+.operation-area{
+    display: inline-block;
+    font-size: 16px;
+}
+
+.sort{
+    margin-left: 635px;
+    display: inline-block;
+    font-size: 16px;
+}
+
 table {
     margin: 10px;
 }

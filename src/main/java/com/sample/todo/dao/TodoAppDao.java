@@ -32,13 +32,14 @@ public class TodoAppDao {
         return ++maxTodoId;
     }
 
-    public <T> void insert(int todoId, String title, String detail, String deadline) {
+    public <T> void insert(int todoId, String title, String detail, String deadline, String category) {
         MapSqlParameterSource paramMap = new MapSqlParameterSource();
         paramMap.addValue("todoId", todoId);
         paramMap.addValue("title", title);
         paramMap.addValue("detail", detail);
         paramMap.addValue("deadline", deadline);
-        jdbcTemplate.update("INSERT INTO TODO_APP VALUES(:todoId, :title, :detail, :deadline)", paramMap);
+        paramMap.addValue("category", category);
+        jdbcTemplate.update("INSERT INTO TODO_APP VALUES(:todoId, :title, :detail, :deadline, :category)", paramMap);
     }
 
     public <T> void delete(int id)
@@ -57,13 +58,14 @@ public class TodoAppDao {
         return resultList;
     }
 
-    public <T> void update(int todoId, String title, String detail, String deadline) {
+    public <T> void update(int todoId, String title, String detail, String deadline, String category) {
         MapSqlParameterSource paramMap = new MapSqlParameterSource();
         paramMap.addValue("todoId", todoId);
         paramMap.addValue("title", title);
         paramMap.addValue("detail", detail);
         paramMap.addValue("deadline", deadline);
-        jdbcTemplate.update("update TODO_APP SET TITLE = :title, DETAIL = :detail, DEAD_LINE = :deadline where TODO_ID = :todoId", paramMap);
+        paramMap.addValue("category", category);
+        jdbcTemplate.update("update TODO_APP SET TITLE = :title, DETAIL = :detail, DEAD_LINE = :deadline, CATEGORY = :category where TODO_ID = :todoId", paramMap);
     }
 
     public List<TodoApp> getTodoAppListSort(String title, String select) {
