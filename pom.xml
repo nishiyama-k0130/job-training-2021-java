@@ -21,6 +21,7 @@
         <java.version>11</java.version>
         <log4jdbc.log4j2.version>1.16</log4jdbc.log4j2.version>
         <rest.assured.version>2.3.3</rest.assured.version>
+        <spring-loaded.version>1.2.6.RELEASE</spring-loaded.version>
     </properties>
 
     <dependencies>
@@ -63,6 +64,34 @@
                         <version>${spring-loaded.version}</version>
                     </dependency>
                 </dependencies>
+            </plugin>
+            <plugin>
+                <groupId>net.revelc.code.formatter</groupId>
+                <artifactId>formatter-maven-plugin</artifactId>
+                <version>2.22.0</version>
+                <configuration>
+                    <configFile>
+                        ${project.basedir}/tool/styleguide/eclipse-java-google-style.xml
+                    </configFile>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>3.2.2</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>com.puppycrawl.tools</groupId>
+                        <artifactId>checkstyle</artifactId>
+                        <version>10.10.0</version>
+                    </dependency>
+                </dependencies>
+                <configuration>
+                    <configLocation>tool/styleguide/fs_google_checks.xml</configLocation>
+                    <consoleOutput>true</consoleOutput>
+                    <failsOnError>true</failsOnError>
+                    <linkXRef>false</linkXRef>
+                </configuration>
             </plugin>
         </plugins>
     </build>

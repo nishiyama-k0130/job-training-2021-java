@@ -18,28 +18,28 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class TodoAppController {
 
-    @Autowired
-    private TodoAppService service;
+  @Autowired
+  private TodoAppService service;
 
-    /**
-     * valueの部分がURL<br>
-     * POSTを許可しているのは、{@code #register(TodoApp, Model)} からredirectしてくるため
-     */
-    @RequestMapping(value = { "/", "index" }, method = { RequestMethod.GET, RequestMethod.POST })
-    String index(Model model) {
-        List<TodoApp> todoList = service.getTodoAppList();
-        model.addAttribute("todoList", todoList);// ここの"todoList"というキーがindex.htmlで参照されている
-        return "index";// resources/index.htmlを指している
-    }
+  /**
+   * valueの部分がURL<br>
+   * POSTを許可しているのは、{@code #register(TodoApp, Model)} からredirectしてくるため
+   */
+  @RequestMapping(value = {"/", "index"}, method = {RequestMethod.GET, RequestMethod.POST})
+  String index(Model model) {
+    List<TodoApp> todoList = service.getTodoAppList();
+    model.addAttribute("todoList", todoList); // ここの"todoList"というキーがindex.htmlで参照されている
+    return "index"; // resources/index.htmlを指している
+  }
 
-    @RequestMapping(value = "/new", method = RequestMethod.GET)
-    String add(Model model) {
-        return "detail";
-    }
+  @RequestMapping(value = "/new", method = RequestMethod.GET)
+  String add(Model model) {
+    return "detail";
+  }
 
-    @RequestMapping(value = "/register", method = RequestMethod.POST)
-    String register(@ModelAttribute TodoApp todoApp, Model model) {
-        service.register(todoApp.getTitle(), todoApp.getDetail());
-        return "redirect:index";// 登録したらindexに移る
-    }
+  @RequestMapping(value = "/register", method = RequestMethod.POST)
+  String register(@ModelAttribute TodoApp todoApp, Model model) {
+    service.register(todoApp.getTitle(), todoApp.getDetail());
+    return "redirect:index"; // 登録したらindexに移る
+  }
 }
