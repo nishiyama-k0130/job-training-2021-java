@@ -1,5 +1,5 @@
 # Sample TODO Application
-Sample Java Spring Boot Application
+Sample Java Spring Boot Application for New Graduates Training
 
 # Prerequisites
 - java 17
@@ -47,7 +47,8 @@ Mac Ex)
 # tools
 ## Formatter
 We use [google java style formatter](https://github.com/google/styleguide/blob/gh-pages/eclipse-java-google-style.xml)<br>
-[Google Java Style Guide](https://google.github.io/styleguide/javaguide.html)
+[Google Java Style Guide](https://google.github.io/styleguide/javaguide.html)<br>
+[VSCodeにFormatterを適用する方法](https://qiita.com/ryo8000/items/60714fa9c5ce261c1798)<br>
 ```bash
 mvn formatter:format
 ```
