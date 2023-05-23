@@ -1,0 +1,35 @@
+name: Deploy Release to Nexus
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  deploy-release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Set up Amazon Correto JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: "17"
+          distribution: "corretto"
+
+      - name: Check if version is not SNAPSHOT
+        run: |
+          version=$(grep -oPm1 "(?<=<version>)[^<]+" pom.xml)
+          echo "Version: $version"
+          if [[ $version == *"-SNAPSHOT" ]]; then
+            echo Error: Version is SNAPSHOT. Deployment is not allowed.
+            exit 1
+          else
+            echo Release Version Check OK
+          fi
+
+      - name: mvn deploy
+        run: mvn --batch-mode --update-snapshots deploy

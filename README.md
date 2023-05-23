@@ -2,8 +2,9 @@
 Sample Java Spring Boot Application
 
 # Prerequisites
-- java 11
+- java 17
 - maven 3.6.3
+- VS Code
 
 # You can access index page
 http://localhost:8080/
@@ -13,8 +14,8 @@ http://localhost:8080/
 ## Install VS Code
 https://code.visualstudio.com/docs/setup/mac
 
-## Download jdk
-https://download.java.net/java/ga/jdk11/openjdk-11_osx-x64_bin.tar.gz
+## Download jdk Amazon Correto 17
+JDK version [Amazon Correto 17](https://docs.aws.amazon.com/corretto/latest/corretto-17-ug/downloads-list.html)
 
 Unpack and put it under ~/develop/
 
@@ -28,7 +29,7 @@ Specify java.home.
 
 Mac Ex)
 
-"java.home": "/Users/N164/develop/jdk-11.jdk/Contents/Home"
+"java.home": "/Users/N164/develop/amazon-corretto-17.jdk/Contents/Home"
 
 ## Install maven
 Download<br>
@@ -42,3 +43,19 @@ Code > Preference > Settings > Search maven.executable.path
 Mac Ex)
 
 /Users/N164/develop/apache-maven-3.6.3/bin/mvn
+
+# tools
+## Formatter
+We use [google java style formatter](https://github.com/google/styleguide/blob/gh-pages/eclipse-java-google-style.xml)<br>
+[Google Java Style Guide](https://google.github.io/styleguide/javaguide.html)
+```bash
+mvn formatter:format
+```
+
+## Checkstyle
+We use [google checkstyle](https://github.com/checkstyle/checkstyle/blob/master/src/main/resources/google_checks.xml).<br>
+But customized bit.
+```bash
+mvn checkstyle:check
+```
+

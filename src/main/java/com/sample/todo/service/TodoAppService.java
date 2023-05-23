@@ -11,23 +11,23 @@ import org.springframework.stereotype.Component;
 /**
  * ロジックを記述するクラス<br>
  *
- * @Componentと書いておくと、他からはは@Autowiredと記述すれば利用できる。Spring Beanという概念。
+ * {@code @Component}と書いておくと、他からは{@code @Autowired}と記述すれば利用できる。Spring Beanという概念。
  */
 @Component
 public class TodoAppService {
 
-    /**
-     * TodoAppDaoは@Componentを持っているので、@Autowiredで利用できる（裏でSpringがこっそりセットしています）
-     */
-    @Autowired
-    private TodoAppDao dao;
+  /**
+   * TodoAppDaoは{@code @Component}を持っているので、{@code @Autowired}で利用できる（裏でSpringがこっそりセットしています）
+   */
+  @Autowired
+  private TodoAppDao dao;
 
-    public List<TodoApp> getTodoAppList() {
-        return dao.getTodoAppList();
-    }
+  public List<TodoApp> getTodoAppList() {
+    return dao.getTodoAppList();
+  }
 
-    public void register(String title, String detail) {
-        int nextId = dao.getNextId();
-        dao.insert(nextId, title, detail);
-    }
+  public void register(String title, String detail) {
+    int nextId = dao.getNextId();
+    dao.insert(nextId, title, detail);
+  }
 }
